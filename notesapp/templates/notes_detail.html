@@ -1,0 +1,14 @@
+{% block content %}
+
+<div>
+        <div>
+        {% if note.title %}
+            <h1>{{ note.title }}</h1>
+        {% endif %}
+        
+        {% if note.body %}
+            {{note.body}}
+        {% endif %}
+        </div>
+</div>
+{% endblock %}
