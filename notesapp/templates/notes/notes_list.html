@@ -1,14 +1,24 @@
+{% extends "base.html" %}
+
 {% block content %}
+<h1>All Notes</h1>
 
 <div>
+    {% for note in notes %}
         <div>
         {% if note.title %}
-            <h1>{{ note.title }}</h1>
+            <h2>{{ note.title }}</h2>
         {% endif %}
         
         {% if note.body %}
             {{note.body}}
         {% endif %}
         </div>
+    {% endfor %}
 </div>
 {% endblock %}
+
+
+
+
+    
