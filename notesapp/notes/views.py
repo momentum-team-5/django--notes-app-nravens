@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Note
-from .form import NoteForm
+from .forms import NoteForm
+from .forms import SearchForm
 
 # Create your views here.
 def notes_list(request):
@@ -49,4 +50,31 @@ def update_note(request, pk):
 
     #If it is the first time viewing the page (a GET request will be sent), or if the form was not found valid, render an empty form
     return render(request, "notes/update_note.html", {"form": form}) 
+
+def delete_note(request, pk):
+    """
+    Delete an existing note.
+    """
+    note = get_object_or_404(Note, pk = pk)
+    note.delete()
+    return redirect(to="notes_list")
+
+def search(request):
+    if request.method == "GET":
+        form = SearchForm()
+
+    else:
+        form = SearchForm(data=request.POST)
+
+        if form.is_valid():
+            notes = Note.objects.all()
+            title = form.cleaned_data['title']
+            order_by = form.cleaned_data['order_by']
+
+            notes = notes.filter(title__exact=title)
+            notes = notes.order_by(order_by)
+
+            return render(request, "notes/search_results.html", {"notes": notes})
+
+    return render(request, "notes/search.html", {"form": form})
     

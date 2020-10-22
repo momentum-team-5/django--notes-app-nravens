@@ -13,6 +13,9 @@
         {% if note.body %}
             {{note.body}}
         {% endif %}
+
+        <p>Last updated at: {{note.updated_at}} </p>
+        <p>Last created at: {{note.created_at}} </p>
         </div>
     {% endfor %}
 </div>

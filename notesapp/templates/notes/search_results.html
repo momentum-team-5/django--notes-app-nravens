@@ -2,11 +2,13 @@
 
 
 {% block content %}
+<h1>Search Results</h1>
 
 <div>
+    {% for note in notes %}
         <div>
         {% if note.title %}
-            <h1>{{ note.title }}</h1>
+            <h2>{{ note.title }}</h2>
         {% endif %}
         
         {% if note.body %}
@@ -15,7 +17,7 @@
 
         <p>Last updated at: {{note.updated_at}} </p>
         <p>Last created at: {{note.created_at}} </p>
-
         </div>
+    {% endfor %}
 </div>
 {% endblock %}
